@@ -48,16 +48,16 @@ fi
 
 # Output info about requested version and resolved Nginx version
 if [ "$nginx_version" == "" ]; then
-  nginx_version="1.7.9"
-  nginx_url="http://nginx.org/download/nginx-1.7.9.tar.gz"
-  info "Defaulting to version 1.7.9."
+  nginx_version="1.14.0"
+  nginx_url="http://nginx.org/download/nginx-1.14.0.tar.gz"
+  info "Defaulting to version 1.14.0."
 # elif [ "$nginx_version" == "mainline" ]; then
 #   nginx_version="mainline"
-#   nginx_url="http://nginx.org/download/nginx-1.7.9.tar.gz"
+#   nginx_url="http://nginx.org/download/nginx-1.13.12.tar.gz"
 #   info "Requested nginx version: mainline - $nginx_version"
 # elif [ "$nginx_version" == "stable" ]; then
 #   nginx_version="stable"
-#   nginx_url="http://nginx.org/download/nginx-1.7.9.tar.gz"
+#   nginx_url="http://nginx.org/download/nginx-1.14.0.tar.gz"
 #   info "Requested nginx version: mainline - $nginx_version"
 else
   nginx_url="http://nginx.org/download/nginx-$nginx_version.tar.gz"
@@ -122,7 +122,7 @@ fi
 # build a startup script
 echo -n "-----> Creating startup script... "
 mkdir "$build_dir/bin"
-cat <<EOF >"$build_dir/bin/start_nginx"
+cat <<EOF >"$build_dir/vendor/nginx/bin/start_nginx"
 #!/usr/bin/env bash
 erb conf/nginx.conf.erb > conf/nginx.conf
 mkdir -p logs
@@ -130,12 +130,12 @@ touch logs/access.log logs/error.log
 (tail -qF -n 0 --pid=\$\$ logs/*.log &)
 exec nginx -p .
 EOF
-chmod +x "$build_dir/bin/start_nginx"
+chmod +x "$build_dir/vendor/nginx/bin/start_nginx"
 echo "done"
 
 if [[ ! -f $build_dir/Procfile ]]; then
   echo -n "-----> Creating Procfile... "
-  echo "web: bin/start_nginx" > $build_dir/Procfile
+  echo "web: start_nginx" > $build_dir/Procfile
   chmod +x "$build_dir/Procfile"
   echo "done"
 fi
