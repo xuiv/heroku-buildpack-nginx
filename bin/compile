@@ -110,7 +110,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   head "Configuring"
   ./configure --prefix=/app/vendor/nginx \
               --add-module=websockify-nginx-module \
-              --add-module=ngx_http_proxy_connect_modul \
+              --add-module=ngx_http_proxy_connect_module \
               --add-module=nginx_tcp_proxy_module \
               --with-pcre=contrib/pcre-${PCRE_VERSION} \
               --with-http_ssl_module \
