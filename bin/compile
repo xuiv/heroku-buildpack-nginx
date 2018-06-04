@@ -103,7 +103,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   git clone https://github.com/chobits/ngx_http_proxy_connect_module.git
   git clone https://github.com/yaoweibin/nginx_tcp_proxy_module.git
   
-  if [ $(echo $nginx_version | sed 's/^.*\.\(.*\)\..*$/\1/') -ge 8 ]; then
+  if [ $(echo $nginx_version | sed 's/^\(.*\)\..*$/\1/') -ge 1 ] && [ $(echo $nginx_version | sed 's/^.*\.\(.*\)\..*$/\1/') -ge 8 ]; then
     patch -p1 < nginx_tcp_proxy_module/tcp_1_8.patch
   else
     patch -p1 < nginx_tcp_proxy_module/tcp.patch
