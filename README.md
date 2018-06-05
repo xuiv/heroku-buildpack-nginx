@@ -14,7 +14,7 @@ Example usage:
     conf:
     mime.types     _nginx.cfg     nginx.conf.erb
 
-    $ heroku create --stack cedar --buildpack https://github.com/abhishekmunie/heroku-buildpack-nginx.git
+    $ heroku create appname --stack cedar-14 --buildpack https://github.com/xuiv/heroku-buildpack-nginx.git
     ...
 
     $ git push heroku master
