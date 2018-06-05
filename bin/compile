@@ -94,7 +94,9 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   cd "$build_dir"
   cd $nginx_src_dir
 
+  if [ -z "$PCRE_VERSION" ]; then
   PCRE_VERSION=8.42
+  fi
   pushd contrib
   curl https://ftp.pcre.org/pub/pcre/pcre-${PCRE_VERSION}.tar.gz -sL -o - | tar xzf -
   popd
