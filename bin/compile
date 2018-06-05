@@ -113,7 +113,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
     if [ $(echo $nginx_version | sed 's/^\([[:digit:]]*\)\..*$/\1/') -eq 1 ] && [ $(echo $nginx_version | sed 's/^[[:digit:]]*\.\([[:digit:]]*\)\..*$/\1/') -le 12 ]; then
       patch -p1 < ngx_http_proxy_connect_module/patch/proxy_connect.patch
     elif [ $(echo $nginx_version | sed 's/^\([[:digit:]]*\)\..*$/\1/') -eq 1 ] && [ $(echo $nginx_version | sed 's/^[[:digit:]]*\.\([[:digit:]]*\)\..*$/\1/') -le 14 ]; then
-      patch -p1 < /path/to/ngx_http_proxy_connect_module/patch/proxy_connect_rewrite_1014.patch
+      patch -p1 < ngx_http_proxy_connect_module/patch/proxy_connect_rewrite_1014.patch
     fi
   fi
 
