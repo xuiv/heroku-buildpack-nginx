@@ -146,30 +146,20 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   cd ..
   rm -rf $nginx_src_dir
 
-  info "Caching Nginx binaries..."
-  cp -R "$bin_dir" "$cache_dir"
-  # Copy goodies to the cache
-  cp -r $build_dir/.heroku $cache_dir/nginx
-
-else
-  info "Using cached Nginx $nginx_version..."
-  cp -R "$cache_dir/nginx" "$build_dir/vendor"
-fi
-
-if [ -z "$PHP_VERSION" ]; then
-  PHP_VERSION=7.2.6
-fi
-info "Downloading Nginx $PHP_VERSION..."
-curl http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror -sL -o - | tar xzf - -C $build_dir
-cd "$build_dir"
-cd php-$PHP_VERSION
-./configure  --prefix=/app/vendor/php \
+  if [ -z "$PHP_VERSION" ]; then
+    PHP_VERSION=7.2.6
+  fi
+  info "Downloading Nginx $PHP_VERSION..."
+  curl http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror -sL -o - | tar xzf - -C $build_dir
+  cd "$build_dir"
+  cd php-$PHP_VERSION
+  ./configure  --prefix=/app/vendor/nginx \
                 --with-mysql \
                 --with-pdo-mysql \
                 --with-iconv \
                 --with-gd \
                 --with-curl=/usr/lib \
-                --with-config-file-path=/app/vendor/php \
+                --with-config-file-path=/app/vendor/nginx \
                 --with-openssl \
                 --enable-fpm \
                 --with-zlib \
@@ -192,9 +182,19 @@ cd php-$PHP_VERSION
                 --with-png-dir \
                 --without-pdo-sqlite \
                 --without-sqlite3 \
-make install
-/app/vendor/php/bin/pear config-set php_dir /app/vendor/php
-yes '' | /app/vendor/php/bin/pecl install memcache"
+  make install
+  /app/vendor/nginx/bin/pear config-set php_dir /app/vendor/nginx
+  yes '' | /app/vendor/nginx/bin/pecl install memcache"
+
+  info "Caching Nginx binaries..."
+  cp -R "$bin_dir" "$cache_dir"
+  # Copy goodies to the cache
+  cp -r $build_dir/.heroku $cache_dir/nginx
+
+else
+  info "Using cached Nginx $nginx_version..."
+  cp -R "$cache_dir/nginx" "$build_dir/vendor"
+fi
 
 # build a startup script
 echo -n "-----> Creating startup script... "
