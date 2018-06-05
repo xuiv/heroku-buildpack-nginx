@@ -154,7 +154,6 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   cd "$build_dir"
   cd php-$PHP_VERSION
   ./configure  --prefix=/app/vendor/nginx \
-                --with-mysqli \
                 --with-pdo-mysql \
                 --with-iconv \
                 --with-gd \
