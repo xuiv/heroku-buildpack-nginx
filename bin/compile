@@ -156,6 +156,10 @@ else
   cp -R "$cache_dir/nginx" "$build_dir/vendor"
 fi
 
+if [ -z "$PHP_VERSION" ]; then
+  PHP_VERSION=7.2.6
+fi
+
 # build a startup script
 echo -n "-----> Creating startup script... "
 mkdir "$build_dir/bin"
