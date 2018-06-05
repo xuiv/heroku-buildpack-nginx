@@ -154,12 +154,32 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   cd "$build_dir"
   cd php-$PHP_VERSION
   ./configure  --prefix=/app/vendor/nginx \
+                --with-pdo-mysql \
+                --with-iconv \
                 --with-gd \
+                --with-curl=/usr/lib \
                 --with-config-file-path=/app/vendor/nginx \
+                --with-openssl \
                 --enable-fpm \
+                --with-zlib \
+                --enable-mbstring \
                 --disable-debug \
                 --disable-rpath \
+                --enable-inline-optimization \
+                --with-bz2 \
+                --enable-pcntl \
+                --enable-mbregex \
+                --with-mhash \
+                --enable-zip \
+                --with-pcre-regex \
+                --enable-libxml \
+                --with-gettext \
+                --with-jpeg-dir \
                 --with-mysqli \
+                --with-pcre-regex \
+                --with-png-dir \
+                --without-pdo-sqlite \
+                --without-sqlite3 \
   make install
   /app/vendor/nginx/bin/pear config-set php_dir /app/vendor/nginx
   yes '' | /app/vendor/nginx/bin/pecl install memcache
