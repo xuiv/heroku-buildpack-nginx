@@ -169,7 +169,7 @@ cd php-$PHP_VERSION
                 --with-iconv \
                 --with-gd \
                 --with-curl=/usr/lib \
-                --with-config-file-path=conf \
+                --with-config-file-path=/app/vendor/php \
                 --with-openssl \
                 --enable-fpm \
                 --with-zlib \
