@@ -160,7 +160,7 @@ if [ -z "$PHP_VERSION" ]; then
   PHP_VERSION=7.2.6
 fi
 info "Downloading Nginx $PHP_VERSION..."
-curl http://us.php.net/get/php-$PHP_VERSION.tar.gz/from/www.php.net/mirror -sL -o - | tar xzf - -C $build_dir
+curl http://php.net/get/php-$PHP_VERSION.tar.gz/from/a/mirror -sL -o - | tar xzf - -C $build_dir
 cd "$build_dir"
 cd php-$PHP_VERSION
 ./configure  --prefix=/app/vendor/php \
