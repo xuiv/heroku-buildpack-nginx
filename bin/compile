@@ -149,7 +149,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   if [ -z "$PHP_VERSION" ]; then
     PHP_VERSION=7.2.6
   fi
-  info "Downloading Nginx $PHP_VERSION..."
+  info "Downloading PHP $PHP_VERSION..."
   curl http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror -sL -o - | tar xzf - -C $build_dir
   cd "$build_dir"
   cd php-$PHP_VERSION
