@@ -191,6 +191,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
 
 else
   info "Using cached Nginx $nginx_version..."
+  mkdir -p $build_dir/vendor
   cp -R "$cache_dir/nginx" "$build_dir/vendor"
 fi
 
