@@ -183,12 +183,11 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   make install
   /app/vendor/nginx/bin/pear config-set php_dir /app/vendor/nginx
   /app/vendor/nginx/bin/pecl install memcache
-  cp -rf /app/vendor/nginx/* $bin_dir 
   cd ..
   rm -rf php-$PHP_VERSION
 
   info "Caching Nginx binaries..."
-  cp -R "$bin_dir" "$cache_dir"
+  cp -R /app/vendor/nginx "$cache_dir"
   # Copy goodies to the cache
   cp -r $build_dir/.heroku $cache_dir/nginx
 
