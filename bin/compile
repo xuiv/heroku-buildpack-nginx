@@ -221,7 +221,7 @@ mkdir -p logs
 mkdir -p /app/vendor/nginx/var/log
 touch logs/access.log logs/error.log /app/vendor/nginx/var/log/php-fpm.log
 (tail -qF -n 0 --pid=\$\$ logs/*.log /app/vendor/nginx/var/log/*.log &)
-exec php-fpm
+php-fpm
 exec nginx -p .
 EOF
 chmod +x "$build_dir/vendor/nginx/bin/start_nginx"
