@@ -187,8 +187,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
                 --without-sqlite3
   make install
   /app/vendor/nginx/bin/pear config-set php_dir /app/vendor/nginx
-  #/app/vendor/nginx/bin/pecl channel-update pecl.php.net
-  yes '' | /app/vendor/nginx/bin/pecl install memcache
+  /app/vendor/nginx/bin/pecl install memcache
   cd "$build_dir"
   rm -rf php-$PHP_VERSION
 
