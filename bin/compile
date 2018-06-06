@@ -153,7 +153,8 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   curl http://php.net/get/php-$PHP_VERSION.tar.gz/from/this/mirror -sL -o - | tar xzf - -C $build_dir
   cd "$build_dir"
   cd php-$PHP_VERSION
-  ./configure  --prefix=/app/vendor/nginx \
+  ./configure   --build=x86_64-pc-linux-gnu \ 
+                --prefix=/app/vendor/nginx \
                 --with-pdo-mysql \
                 --with-iconv \
                 --with-gd \
