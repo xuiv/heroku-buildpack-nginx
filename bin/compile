@@ -184,6 +184,8 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
 
   info "Caching Nginx binaries..."
   cp -R /app/vendor/nginx "$cache_dir"
+  echo "***********************************************"
+  ls $cache_dir
   # Copy goodies to the cache
   cp -r $build_dir/.heroku $cache_dir/nginx
   cp -R "$cache_dir/nginx" "$build_dir/vendor"
@@ -195,7 +197,6 @@ fi
 
 # build a startup script
 echo -n "-----> Creating startup script... "
-mkdir "$build_dir/bin"
 cat <<EOF >"$build_dir/vendor/nginx/bin/start_nginx"
 #!/usr/bin/env bash
 
