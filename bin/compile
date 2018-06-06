@@ -70,10 +70,6 @@ export_env_dir $env_dir
 
 nginx_src_dir="nginx-$nginx_version"
 
-bin_dir=$build_dir/vendor/nginx
-
-mkdir -p "$bin_dir"
-
 # [ "$nginx" == "mainline" ] || [ "$nginx" == "stable" ]
 if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-version || [ $(cat $cache_dir/nginx/.heroku/nginx-version) != "$nginx_version" ]; then
   info "Nginx version changed since last build; rebuilding."
@@ -190,6 +186,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   cp -R /app/vendor/nginx "$cache_dir"
   # Copy goodies to the cache
   cp -r $build_dir/.heroku $cache_dir/nginx
+  cp -R "$cache_dir/nginx" "$build_dir/vendor"
 
 else
   info "Using cached Nginx $nginx_version..."
