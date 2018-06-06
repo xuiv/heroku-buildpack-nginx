@@ -157,6 +157,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
                 --host=x86_64-unknown-linux-gnu \
                 --target='' \
                 --prefix=/app/vendor/nginx \
+                --with-mysql \
                 --with-pdo-mysql \
                 --with-iconv \
                 --with-gd \
@@ -168,6 +169,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
                 --enable-mbstring \
                 --disable-debug \
                 --disable-rpath \
+                --enable-gd-native-ttf \
                 --enable-inline-optimization \
                 --with-bz2 \
                 --enable-pcntl \
@@ -188,6 +190,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   #/app/vendor/nginx/bin/pecl channel-update pecl.php.net
   yes '' | /app/vendor/nginx/bin/pecl install memcache
   mv "$bin_dir/sbin/*" "$bin_dir/bin"
+  cd ..
   rm -rf php-$PHP_VERSION
 
   info "Caching Nginx binaries..."
