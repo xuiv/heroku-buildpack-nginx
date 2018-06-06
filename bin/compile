@@ -183,7 +183,7 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   rm -rf php-$PHP_VERSION
 
   info "Caching Nginx binaries..."
-  cp -R /app/vendor/nginx "$cache_dir"
+  cp -R /app/vendor/* "$cache_dir"
   # Copy goodies to the cache
   cp -r $build_dir/.heroku $cache_dir/nginx
   cp -R "$cache_dir/nginx" "$build_dir/vendor"
