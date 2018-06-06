@@ -189,8 +189,11 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   /app/vendor/nginx/bin/pear config-set php_dir /app/vendor/nginx
   #/app/vendor/nginx/bin/pecl channel-update pecl.php.net
   yes '' | /app/vendor/nginx/bin/pecl install memcache
+  echo "**************************************************1"
   cd ..
+  echo "**************************************************2"
   rm -rf php-$PHP_VERSION
+  echo "**************************************************3"
 
   info "Caching Nginx binaries..."
   cp -R "$bin_dir" "$cache_dir"
