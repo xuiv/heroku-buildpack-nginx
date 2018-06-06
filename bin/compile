@@ -189,7 +189,6 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   /app/vendor/nginx/bin/pear config-set php_dir /app/vendor/nginx
   #/app/vendor/nginx/bin/pecl channel-update pecl.php.net
   yes '' | /app/vendor/nginx/bin/pecl install memcache
-  mv "$bin_dir/sbin/*" "$bin_dir/bin"
   cd ..
   rm -rf php-$PHP_VERSION
 
@@ -221,7 +220,7 @@ mkdir -p logs
 mkdir -p /app/vendor/nginx/var/log
 touch logs/access.log logs/error.log /app/vendor/nginx/var/log/php-fpm.log
 (tail -qF -n 0 --pid=\$\$ logs/*.log /app/vendor/nginx/var/log/*.log &)
-php-fpm
+exec php-fpm
 exec nginx -p .
 EOF
 chmod +x "$build_dir/vendor/nginx/bin/start_nginx"
@@ -237,4 +236,4 @@ fi
 # Update the PATH
 info "Building runtime environment"
 mkdir -p $build_dir/.profile.d
-echo "export PATH=\"\$HOME/vendor/nginx/bin:\$PATH\";" > $build_dir/.profile.d/nginx.sh
+echo "export PATH=\"\$HOME/vendor/nginx/bin:\$HOME/vendor/nginx/sbin:\$PATH\";" > $build_dir/.profile.d/nginx.sh
