@@ -136,11 +136,6 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   fi
   head "Compiling with Make"
   make install 2>&1 | indent
-  #head "Moving generated binary"
-  #mkdir -p "$bin_dir/bin"
-  #mv objs/nginx "$bin_dir/bin"
-
-  #info "Nginx was Installed at: $bin_dir"
 
   info "Cleaning up Nginx source files..."
   cd ..
@@ -188,7 +183,6 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   make install
   /app/vendor/nginx/bin/pear config-set php_dir /app/vendor/nginx
   /app/vendor/nginx/bin/pecl install memcache
-  #mv $bin_dir/bin/nginx /app/vendor/nginx/bin
   cp -rf /app/vendor/nginx/* $bin_dir 
   cd ..
   rm -rf php-$PHP_VERSION
