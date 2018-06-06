@@ -13,7 +13,7 @@ env_dir=$3
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
 heroku_dir=$build_dir/.heroku
 mkdir -p $heroku_dir/nginx
-mkdir -p $build_dir/nginx/bin
+mkdir -p $build_dir/vendor/nginx/bin
 warnings=$(mktemp)
 
 # Load some convenience functions like info(), echo(), and indent()
