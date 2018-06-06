@@ -182,13 +182,8 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
                 --with-pcre-regex \
                 --with-png-dir \
                 --without-pdo-sqlite \
-                --without-sqlite3 \
-  echo "*******************************************************"
+                --without-sqlite3
   make install
-  ls -l /app/vendor/nginx/bin
-  ls -l $bin_dir/bin
-  echo "*******************************************************"
-  
   /app/vendor/nginx/bin/pear config-set php_dir /app/vendor/nginx
   yes '' | /app/vendor/nginx/bin/pecl install memcache
   mv "$bin_dir/sbin/*" "$bin_dir/bin"
