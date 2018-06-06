@@ -13,7 +13,6 @@ env_dir=$3
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
 heroku_dir=$build_dir/.heroku
 mkdir -p $heroku_dir/nginx
-mkdir -p $build_dir/vendor/nginx/bin
 warnings=$(mktemp)
 
 # Load some convenience functions like info(), echo(), and indent()
@@ -184,13 +183,11 @@ if ! test -d $cache_dir/nginx || ! test -f $cache_dir/nginx/.heroku/nginx-versio
   rm -rf php-$PHP_VERSION
 
   info "Caching Nginx binaries..."
-  ls -l /app/vendor/
   cp -rf /app/vendor/nginx "$cache_dir"
-  ls -l $cache_dir
   # Copy goodies to the cache
   cp -r $build_dir/.heroku $cache_dir/nginx
+  mkdir -p $build_dir/vendor
   cp -R "$cache_dir/nginx" "$build_dir/vendor"
-  ls -l $build_dir/vendor
 
 else
   info "Using cached Nginx $nginx_version..."
