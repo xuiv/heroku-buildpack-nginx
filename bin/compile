@@ -200,6 +200,14 @@ echo -n "-----> Creating startup script... "
 cat <<EOF >"$build_dir/vendor/nginx/bin/start_nginx"
 #!/usr/bin/env bash
 
+if [ -d /app/public ]; then
+  cp /app/vendor/nginx/php/fpm/status.html /app/public/status.html
+fi
+
+if [ -d /app/public/wp-content ]; then
+  chmod 755 /app/public/wp-content
+fi
+
 erb conf/nginx.conf.erb > conf/nginx.conf
 cp -rf conf/php/* /app/vendor/nginx
 
